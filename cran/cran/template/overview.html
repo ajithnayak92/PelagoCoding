@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Package List</h1>
+  {% if package_list %}
+  <ul>
+    {% for package in package_list %}
+      <li>
+        <a href="/api/detail/{{ package.package_name }}">{{ package.title }}</a> ({{package.version}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no packages in the library.</p>
+  {% endif %}
+{% endblock %}

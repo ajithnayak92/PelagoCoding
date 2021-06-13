@@ -1,0 +1,67 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Package Details</h1>
+  {% if package %}
+    <table>
+        <thead>
+            <tr>
+                <td>Item</td>
+                <td>Value</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Title</td>
+                <td>{{ package.title }}</td>
+            </tr>
+        </tbody>
+                <tbody>
+            <tr>
+                <td>Description</td>
+                <td>{{ package.description }}</td>
+            </tr>
+        </tbody>
+                <tbody>
+            <tr>
+                <td>Package_name</td>
+                <td>{{ package.package_name }}</td>
+            </tr>
+        </tbody>
+                <tbody>
+            <tr>
+                <td>Version</td>
+                <td>{{ package.version }}</td>
+            </tr>
+        </tbody>
+                <tbody>
+            <tr>
+                <td>Authors</td>
+                <td>{{ package.authors }}</td>
+            </tr>
+        </tbody>
+                <tbody>
+            <tr>
+                <td>Maintainers</td>
+                <td>{{ package.maintainers }}</td>
+            </tr>
+        </tbody>
+                <tbody>
+            <tr>
+                <td>Date/Publication</td>
+                <td>{{ package.date_or_publication }}</td>
+            </tr>
+        </tbody>
+                <tbody>
+            <tr>
+                <td>Package</td>
+                <td> <a href="/api/download/{{ package.package_name }}">{{ package.title }}</a></td>
+            </tr>
+        </tbody>
+
+
+    </table>
+  {% else %}
+    <p>There are no packages in the library.</p>
+  {% endif %}
+{% endblock %}

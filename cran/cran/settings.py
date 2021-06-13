@@ -55,7 +55,7 @@ ROOT_URLCONF = 'cran.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/Users/ajith.nayak/temp/personal/PelagoCodingAssignment/cran/cran'],
+        'DIRS': ['/Users/ajith.nayak/temp/personal/PelagoCodingAssignment/cran/cran/template'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

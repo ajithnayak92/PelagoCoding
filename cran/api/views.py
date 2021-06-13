@@ -2,6 +2,8 @@ import mimetypes
 import os
 
 from django.shortcuts import render, redirect
+from django.views import generic
+
 
 from django.http.response import JsonResponse, HttpResponse, Http404, HttpResponseRedirect
 
@@ -11,7 +13,8 @@ from api.forms import PackageUploadForm
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the repo index.")
+    package_list = Package.objects.all()
+    return render(request, 'overview.html', {'package_list': package_list})
 
 
 def detail(request, package_name):
@@ -20,12 +23,15 @@ def detail(request, package_name):
     except Package.DoesNotExist:
         raise Http404("The package you're looking for does not exist")
     # return render(request, 'polls/detail.html', {'package': package_name})
-    return HttpResponse("You're looking at package %s." % package)
+    # return HttpResponse("You're looking at package %s." % package)
+    return render(request, 'detail.html', {'package': package})
 
 
 def search(request, query_term):
-    response = "You're looking at the results of package %s."
-    return HttpResponse(response % query_term)
+    # response = "You're looking at the results of package %s."
+    package_list = Package.objects.filter(title__contains=query_term)
+    # print ("Returen size "+len(package_list))
+    return render(request, 'overview.html', {'package_list': package_list})
 
 
 def download(request, package_name):
@@ -44,10 +50,6 @@ def upload(request, package_name):
     return HttpResponse("You're uploading package %s with version xx." % package_name)
 
 
-def process_tarball(package_file):
-    pass
-
-
 def upload_package(request):
     if request.method == 'POST':
         form = PackageUploadForm(request.POST, request.FILES)
@@ -55,10 +57,15 @@ def upload_package(request):
         if form.is_valid():
 
             x = form.save()
-            process_tarball(x.package)
             # return redirect('index')
             return HttpResponse("Thank you yor package is saved")
     else:
         form = PackageUploadForm()
-    return render(request, 'model_form_upload.html', {
+    return render(request, 'upload.html', {
         'form': form})
+
+class PackageListView(generic.ListView):
+    model = Package
+    context_object_name = 'package_list'   # your own name for the list as a template variable
+    queryset = Package.objects # Get 5 books containing the title war
+    template_name = 'overview.html'  # Specify your own template name/location
