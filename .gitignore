@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#manually added
+cran/api/migrations/
+cran/package_files/
