@@ -14,3 +14,10 @@ that would help populatee the metadata into the DB
 
 please use the startup script provided to run the code
 This would require MySQL DB installed on the local machine
+
+
+Sample URL:
+http://localhost:8000/api/
+http://localhost:8000/api/search/Shape
+http://localhost:8000/api/handle
+http://localhost:8000/api/detail/xyz_1
